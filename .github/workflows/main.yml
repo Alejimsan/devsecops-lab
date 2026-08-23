@@ -30,3 +30,10 @@ jobs:
           format: 'HTML'
           args: >
             --failOnCVSS 7
+
+      - name: Guardar Informe HTML
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Informe-OWASP-SCA
+          path: reports/dependency-check-report.html
