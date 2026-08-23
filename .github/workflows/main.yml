@@ -13,4 +13,4 @@ jobs:
         run: pip install semgrep
 
       - name: Ejecutar SAST (Falla si hay vulnerabilidades)
-        run: semgrep scan --config "p/security-audit" --error
+        run: semgrep scan --config "p/default" --error
