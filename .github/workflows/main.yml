@@ -9,7 +9,8 @@ jobs:
       - name: Clonar el repositorio
         uses: actions/checkout@v4
 
-      - name: Ejecutar escáner Semgrep
-        uses: returntocorp/semgrep-action@v1
-        with:
-          config: "p/default"
+      - name: Instalar Semgrep
+        run: pip install semgrep
+
+      - name: Ejecutar SAST (Falla si hay vulnerabilidades)
+        run: semgrep scan --config "p/security-audit" --error
