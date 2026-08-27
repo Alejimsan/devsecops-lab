@@ -74,3 +74,19 @@ jobs:
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
+
+  dast_zap:
+    name: DAST (OWASP ZAP)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Desplegar aplicación de prueba (DVWA)
+        run: docker run --rm -d -p 8080:80 vulnerables/web-dvwa
+        
+      - name: Esperar a que el servidor inicie
+        run: sleep 15
+
+      - name: Ejecutar OWASP ZAP Baseline Scan
+        uses: zaproxy/action-baseline@v0.12.0
+        with:
+          target: 'http://localhost:8080'
+          fail_action: true
